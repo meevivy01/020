@@ -1633,7 +1633,7 @@ class JobThaiRowScraper:
                                         if EMAIL_USE_HISTORY and person_data['id'] in self.current_history_data:
                                             try:
                                                 last_notify = datetime.datetime.strptime(self.current_history_data[person_data['id']], "%Y-%m-%d").date()
-                                                if (today - last_notify).days < 7: should_add = False
+                                                if (today - last_notify).days < 7: should_add = True
                                             except: pass
                                     if should_add: current_keyword_batch.append(person_data)
 
@@ -1643,7 +1643,8 @@ class JobThaiRowScraper:
                                         if EMAIL_USE_HISTORY and person_data['id'] in self.current_history_data:
                                              try:
                                                   last_notify = datetime.datetime.strptime(self.current_history_data[person_data['id']], "%Y-%m-%d").date()
-                                                  if (today - last_notify).days < 1: should_hot = False
+                                                  if (today - last_notify).days < 1: should_hot = True              
+                                                  #False
                                              except: pass
                                         
                                         if should_hot:
@@ -1683,7 +1684,7 @@ class JobThaiRowScraper:
         console.rule("[bold green]🏁 จบการทำงาน JobThai (G-Sheet Memory Mode)[/]")
         try: self.driver.quit()
         except: pass
-
+        
 if __name__ == "__main__":
     console.print("[bold green]🚀 Starting JobThai Scraper (Google Sheets Edition)...[/]")
     if not MY_USERNAME or not MY_PASSWORD:
@@ -1691,4 +1692,5 @@ if __name__ == "__main__":
         exit()
     scraper = JobThaiRowScraper()
     scraper.run()
+
 
